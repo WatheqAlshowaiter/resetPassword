@@ -13,6 +13,11 @@ if (isset($_POST['email'])) {
 
     $emailTo = $_POST['email']; 
     $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    $code = uniqid(true); // true for more uniqueness 
+    $query = mysqli_query($con,"INSERT INTO resetPasswords (code, email) VALUES('$code','$emailTo')"); 
+    if (!$query) {
+       exit('Error'); 
+    }
     try {
         //Server settings
         $mail->SMTPDebug = 0;     // Enable verbose debug output, 1 for produciton , 2,3 for debuging in devlopment 
@@ -35,9 +40,13 @@ if (isset($_POST['email'])) {
         // $mail->addBCC('bcc@example.com');
 
         //Content
+        // this give you the exact link of you site in the right page 
+        // if you are in actual web server, instead of http://" . $_SERVER['HTTP_HOST'] write your link 
+        $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']). "/resetPassword.php?code=$code"; 
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->Subject = 'Your password reset link';
+        $mail->Body    = "<h1> you requested password reset </h1>
+                         Click <a href='$url'>this link</a> to do so";
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
