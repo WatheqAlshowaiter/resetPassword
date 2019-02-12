@@ -24,15 +24,15 @@ if (isset($_POST['email'])) {
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = 'confident.ye@gmail.com';                 // SMTP username
-        $mail->Password = '774881466!';                           // SMTP password
+        $mail->Username = 'email@gmail.com';                 // SMTP username
+        $mail->Password = 'YOURPASSWORD';                           // SMTP password
         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         // $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;   // for tls                                 // TCP port to connect to
         // $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('confident.ye@gmail.com', 'Conf'); // from who? 
+        $mail->setFrom('email@gmail.com', 'SOME NAME'); // from who? 
         $mail->addAddress($emailTo, 'Joe User');     // Add a recipient
 
         $mail->addReplyTo('no-replay@example.com', 'No Replay');
