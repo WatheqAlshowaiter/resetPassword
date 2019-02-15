@@ -3,7 +3,7 @@ make a reset password functionality using PHPMailer
 
 this is practicing after Reece Kenny lessons (highly recommended) in [this link](https://www.youtube.com/watch?v=BLwhJYEOVE4&list=PLy9OqUw9V30b4YiPEnG75T6jd0WBA6UEv). 
 
-this just for demp purpose, so it is not very secure. 
+this just for dev purpose, so it is not very secure. 
 
 ## to make function in your host 
 
