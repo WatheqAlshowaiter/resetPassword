@@ -25,14 +25,14 @@ if (isset($_POST['email'])) {
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = 'email@gmail.com';                 // SMTP username
-        $mail->Password = 'YOURPASSWORD';                           // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        // $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-        $mail->Port = 587;   // for tls                                 // TCP port to connect to
-        // $mail->Port = 465;
+        $mail->Password = 'password';                           // SMTP password
+        // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+        // $mail->Port = 587;   // for tls                                 // TCP port to connect to
+        $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('email@gmail.com', 'SOME NAME'); // from who? 
+        $mail->setFrom('email@gmail.com', 'Someone'); // from who? 
         $mail->addAddress($emailTo, 'Joe User');     // Add a recipient
 
         $mail->addReplyTo('no-replay@example.com', 'No Replay');
@@ -48,6 +48,16 @@ if (isset($_POST['email'])) {
         $mail->Body    = "<h1> you requested password reset </h1>
                          Click <a href='$url'>this link</a> to do so";
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        // to solve a problem 
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+            )
+        );
+
 
         $mail->send();
         echo 'Message has been sent';
@@ -65,9 +75,3 @@ if (isset($_POST['email'])) {
     <br>
     <input type="submit" name="submit" value="Reset Email">
 </form>
-
-
-
-
-
-
